@@ -3,7 +3,14 @@
  * useMovies HOOK
  * ===========================================
  * 
- * @param categoryId - Movie category to fetch ('popular', 'top_rated', 'upcoming')
+ * Fetches movies by category using TanStack Query with caching.
+ * 
+ * USAGE:
+ * ```tsx
+ * const { data: movies, isLoading, error } = useMovies('popular');
+ * ```
+ * 
+ * @param categoryId - Movie category ('popular', 'top_rated', 'upcoming')
  * @returns TanStack Query result with data, loading, error states
  */
 

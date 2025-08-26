@@ -43,27 +43,6 @@ export const formatDate = (dateString: string, locale: string = APP_CONFIG.DEFAU
 };
 
 /**
- * Format runtime in minutes to human readable format
- */
-export const formatRuntime = (minutes: number): string => {
-  if (minutes <= 0) return i18n.format.notAvailable;
-  
-  const hours = Math.floor(minutes / 60);
-  const mins = minutes % 60;
-  
-  if (hours === 0) return `${mins}${i18n.format.runtime.minutes}`;
-  if (mins === 0) return `${hours}${i18n.format.runtime.hours}`;
-  return `${hours}${i18n.format.runtime.hours} ${mins}${i18n.format.runtime.minutes}`;
-};
-
-/**
- * Format vote average to one decimal place
- */
-export const formatRating = (rating: number): string => {
-  return Math.round(rating * 10) / 10 + '';
-};
-
-/**
  * Format large numbers (budget, revenue) to readable format
  */
 export const formatCurrency = (amount: number): string => {

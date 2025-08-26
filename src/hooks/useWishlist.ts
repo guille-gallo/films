@@ -1,8 +1,14 @@
 /**
  * ===========================================
- * useWishlist HOOK - SENIOR LEVEL DESIGN
+ * useWishlist HOOK
  * ===========================================
  * 
+ * Custom hook for managing movie wishlist with persistent storage.
+ * 
+ * USAGE:
+ * ```tsx
+ * const { isInWishlist, toggleWishlist, count } = useWishlist();
+ * ```
  */
 
 import { useCallback } from 'react';
@@ -10,7 +16,7 @@ import type { Movie } from '@/types';
 import { wishlistStore } from '@/stores';
 
 export const useWishlist = () => {
-  // Subscribe to the full wishlist state
+  // Subscribe to store
   const wishlist = wishlistStore((state) => state.wishlist);
   const movieStatuses = wishlistStore((state) => state.movieStatuses);
 

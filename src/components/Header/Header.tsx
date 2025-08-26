@@ -20,8 +20,6 @@ import './Header.scss';
 
 export const Header: React.FC = React.memo(() => {
   const { count } = useWishlist();
-
-  // Direct computation for class name and aria label
   const countClassName = `header__wishlist-btn__count${count === 0 ? ' header__wishlist-btn__count--empty' : ''}`;
   const wishlistAriaLabel = i18n.navigation.wishlistAriaLabel(count);
 

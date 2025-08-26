@@ -1,8 +1,6 @@
 import { 
   debounce, 
   formatDate, 
-  formatRuntime, 
-  formatRating, 
   formatCurrency, 
   truncateText,
   isValidImageUrl,
@@ -54,23 +52,6 @@ describe('Utility Functions', () => {
     it('should handle invalid date', () => {
       const result = formatDate('invalid-date');
       expect(result).toBe('Invalid Date');
-    });
-  });
-
-  describe('formatRuntime', () => {
-    it('should format minutes to hours and minutes', () => {
-      expect(formatRuntime(150)).toBe('2h 30m');
-      expect(formatRuntime(60)).toBe('1h');
-      expect(formatRuntime(45)).toBe('45m');
-      expect(formatRuntime(0)).toBe('N/A');
-    });
-  });
-
-  describe('formatRating', () => {
-    it('should format rating to one decimal place', () => {
-      expect(formatRating(7.85)).toBe('7.9');
-      expect(formatRating(10)).toBe('10');
-      expect(formatRating(0)).toBe('0');
     });
   });
 

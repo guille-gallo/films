@@ -3,6 +3,13 @@
  * useMovieDetails HOOK
  * ===========================================
  * 
+ * Fetches detailed movie information with optimized caching and retry logic.
+ * 
+ * USAGE:
+ * ```tsx
+ * const { data: movie, isLoading, error } = useMovieDetails(movieId);
+ * ```
+ * 
  * @param movieId - The TMDB movie ID to fetch details for
  * @returns TanStack Query result with movie details, loading, error states
  */

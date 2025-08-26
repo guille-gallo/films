@@ -2,9 +2,8 @@
 
 #### **Jest (Unit Tests) **
 - `wishlistStore.test.ts`: store functionality
-- `movieUtils.test.ts`: movie utilities
-- `utils.test.ts`: general utilities
-- `coreLogic.test.ts`: business logic
+- `movieUtils.test.ts`: movie-specific business logic (formatting, categorization, image URLs)
+- `utils.test.ts`: general utilities (debounce, storage, date formatting, currency)
 - `Header.test.tsx`: component testing
 
 #### **Vitest (Functional Tests) **
@@ -31,7 +30,6 @@ __tests__/          # Jest unit tests (isolated testing)
 ├── wishlistStore.test.ts
 ├── movieUtils.test.ts
 ├── utils.test.ts
-├── coreLogic.test.ts
 └── Header.test.tsx
 
 src/tests/          # Vitest functional tests (integration testing)

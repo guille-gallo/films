@@ -3,7 +3,7 @@
  * CAROUSEL COMPONENT
  * ===========================================
  * 
- * A horizontal scrollable carousel for displaying movies with navigation controls.
+ * Horizontal scrollable carousel for displaying movies with navigation controls.
  * Supports different movie categories with category-specific styling.
  * 
  * USAGE:

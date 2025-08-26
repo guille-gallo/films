@@ -1,0 +1,137 @@
+.wishlist {
+  min-height: 100vh;
+  padding-top: calc(#{$header-height} + #{$space-xl});
+  padding-bottom: $space-3xl;
+  
+  &__container {
+    max-width: $container-max-width;
+    margin: 0 auto;
+    padding: 0 $container-padding;
+  }
+  
+  &__header {
+    text-align: center;
+    margin-bottom: $space-3xl;
+    
+    &__title {
+      font-size: $font-size-4xl;
+      font-family: $font-primary;
+      font-weight: 700;
+      margin-bottom: $space-xl;
+      color: $wishlist-accent;
+    }
+    
+    &__heart {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      
+      svg {
+        width: 48px;
+        height: 48px;
+        fill: $wishlist-accent;
+      }
+    }
+    
+    &__count {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: $font-size-sm;
+      font-weight: 700;
+      color: $white;
+      text-shadow: 0 1px 2px $overlay-medium;
+      pointer-events: none;
+    }
+  }
+  
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: $space-xl;
+    margin-bottom: $space-3xl;
+    
+    @media (max-width: $tablet) {
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: $space-lg;
+    }
+    
+    @media (max-width: $mobile) {
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: $space-md;
+    }
+  }
+
+  &__empty {
+    text-align: center;
+    padding: $space-3xl;
+    
+    &__icon {
+      font-size: 4rem;
+      margin-bottom: $space-xl;
+      opacity: 0.5;
+    }
+    
+    &__title {
+      font-size: $font-size-2xl;
+      font-weight: 600;
+      color: $text-secondary;
+      margin-bottom: $space-lg;
+    }
+    
+    &__message {
+      font-size: $font-size-lg;
+      color: $text-muted;
+      margin-bottom: $space-2xl;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+    
+    &__cta {
+      background: $wishlist-accent;
+      color: $white;
+      border: none;
+      padding: $space-lg $space-2xl;
+      border-radius: $radius-lg;
+      font-size: $font-size-lg;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all $transition-fast;
+      text-decoration: none;
+      display: inline-block;
+      box-shadow: 0 4px 12px rgba($wishlist-accent, 0.25);
+      
+      &:hover {
+        background: darken($wishlist-accent, 8%);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba($wishlist-accent, 0.35);
+      }
+    }
+  }
+  
+  &__clear-all {
+    text-align: center;
+    margin-top: $space-2xl;
+    
+    &__btn {
+      background: transparent;
+      color: $wishlist-accent;
+      border: 1px solid $wishlist-accent;
+      padding: $space-md $space-xl;
+      border-radius: $radius-md;
+      font-size: $font-size-sm;
+      cursor: pointer;
+      transition: all $transition-fast;
+      
+      &:hover {
+        background: $wishlist-accent;
+        color: $white;
+        border-color: $wishlist-accent;
+      }
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "name": "films",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:functional": "vitest run",
+    "test:functional:watch": "vitest",
+    "test:functional:ui": "vitest --ui",
+    "test:all": "npm run test && npm run test:functional",
+    "lint": "eslint src --ext .ts,.tsx --report-unused-disable-directives --max-warnings 0",
+    "type-check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.28.3",
+    "@babel/preset-react": "^7.27.1",
+    "@babel/preset-typescript": "^7.27.1",
+    "@testing-library/jest-dom": "^6.8.0",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/jest": "^30.0.0",
+    "@vitejs/plugin-react": "^5.0.1",
+    "@vitest/ui": "^3.2.4",
+    "babel-jest": "^30.0.5",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^30.0.5",
+    "jest-environment-jsdom": "^30.0.5",
+    "jsdom": "^26.1.0",
+    "ts-jest": "^29.4.1",
+    "typescript": "~5.8.3",
+    "vite": "^7.1.2",
+    "vitest": "^3.2.4",
+    "whatwg-fetch": "^3.6.20"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "^5.85.5",
+    "@types/react": "^19.1.10",
+    "@types/react-dom": "^19.1.7",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "react-router-dom": "^7.8.1",
+    "sass": "^1.90.0",
+    "zustand": "^5.0.8"
+  }
+}

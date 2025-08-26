@@ -1,0 +1,1 @@
+export { MovieButtonAndDescription } from './MovieButtonAndDescription';

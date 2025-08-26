@@ -1,0 +1,23 @@
+.homepage {
+  min-height: 100vh;
+  padding-top: calc(#{$header-height} + #{$space-lg});
+  padding-bottom: $space-2xl;
+  
+  &__content {
+    max-width: $container-max-width;
+    margin: 0 auto;
+    padding: 0 $container-padding;
+  }
+  
+  &__section {
+    margin-bottom: $space-xl;
+  }
+  
+  @media (max-width: $tablet) {
+    padding-top: calc(#{$header-height} + #{$space-lg});
+    
+    &__content {
+      padding: 0 $space-sm;
+    }
+  }
+}

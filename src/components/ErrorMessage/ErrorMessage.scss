@@ -1,0 +1,111 @@
+.error-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - #{$header-height} - 60px);
+  padding: $space-xl $container-padding;
+  
+  &__container {
+    max-width: 500px;
+    text-align: center;
+    padding: $space-3xl $space-xl;
+    background: rgba($secondary-color, 0.3);
+    border-radius: $radius-xl;
+    border: 1px solid rgba($white, 0.1);
+    backdrop-filter: blur(10px);
+  }
+  
+  &__icon {
+    font-size: 4rem;
+    margin-bottom: $space-xl;
+    opacity: 0.8;
+    display: block;
+  }
+  
+  &__title {
+    font-size: $font-size-2xl;
+    font-weight: 700;
+    color: $text-primary;
+    margin-bottom: $space-lg;
+    line-height: 1.2;
+  }
+  
+  &__text {
+    font-size: $font-size-base;
+    color: $text-secondary;
+    margin-bottom: $space-2xl;
+    line-height: 1.6;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  &__retry {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-sm;
+    padding: $space-md $space-xl;
+    background: $accent-color;
+    color: white;
+    border: none;
+    border-radius: $radius-md;
+    cursor: pointer;
+    font-size: $font-size-base;
+    font-weight: 600;
+    transition: all $transition-normal;
+    min-width: 120px;
+    justify-content: center;
+    
+    &:hover:not(:disabled) {
+      background: darken($accent-color, 10%);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba($accent-color, 0.3);
+    }
+    
+    &:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+    
+    &--loading {
+      pointer-events: none;
+    }
+    
+    &__spinner {
+      width: 16px;
+      height: 16px;
+      border: 2px solid transparent;
+      border-top: 2px solid currentColor;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+  }
+  
+  @media (max-width: $tablet) {
+    padding: $space-lg $container-padding;
+    min-height: calc(100vh - #{$header-height} - 40px);
+    
+    &__container {
+      padding: $space-2xl $space-lg;
+    }
+    
+    &__icon {
+      font-size: 3rem;
+      margin-bottom: $space-lg;
+    }
+    
+    &__title {
+      font-size: $font-size-xl;
+    }
+    
+    &__text {
+      font-size: $font-size-sm;
+    }
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

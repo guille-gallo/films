@@ -1,0 +1,253 @@
+.movie-card {
+  position: relative;
+  background: $secondary-color;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all $transition-normal;
+  box-shadow: $shadow-md;
+  
+  &:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: $shadow-xl;
+  }
+  
+  &__image-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: $card-aspect-ratio;
+    overflow: hidden;
+    background: linear-gradient(45deg, $secondary-color, darken($secondary-color, 10%));
+  }
+  
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform $transition-slow;
+    
+    &--loading {
+      opacity: 0;
+    }
+    
+    &--loaded {
+      opacity: 1;
+    }
+  }
+  
+  &__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      transparent 60%,
+      rgba($primary-color, 0.8) 100%
+    );
+    opacity: 0;
+    transition: opacity $transition-normal;
+  }
+  
+  &__content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: $space-md;
+    color: $text-primary;
+    transform: translateY(100%);
+    transition: transform $transition-normal;
+  }
+  
+  &__title {
+    font-size: $font-size-sm;
+    font-weight: 600;
+    line-height: 1.4;
+    margin-bottom: $space-xs;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  &__meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: $font-size-xs;
+    color: $text-secondary;
+  }
+  
+  &__rating {
+    display: flex;
+    align-items: center;
+    gap: $space-xs;
+    
+    &__star {
+      color: $rating-star;
+      width: 12px;
+      height: 12px;
+    }
+  }
+  
+  &__year {
+    font-weight: 500;
+  }
+  
+  // Show overlay content on hover
+  &:hover {
+    .movie-card__overlay {
+      opacity: 1;
+    }
+    
+    .movie-card__content {
+      transform: translateY(0);
+    }
+    
+    .movie-card__image {
+      transform: scale(1.1);
+    }
+  }
+  
+  // Fallback image styles
+  &__fallback {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(45deg, $secondary-color, darken($secondary-color, 15%));
+    color: $text-muted;
+    font-size: $font-size-3xl;
+    width: 100%;
+    height: 100%;
+  }
+  
+  // Category-specific styling
+  &--popular {
+    border: 2px solid transparent;
+    
+    &:hover {
+      border-color: $popular-primary;
+      box-shadow: 0 0 20px rgba($popular-primary, 0.3);
+    }
+    
+    .movie-card__title {
+      font-family: $font-primary;
+    }
+  }
+  
+  &--top_rated {
+    border: 2px solid transparent;
+    
+    &:hover {
+      border-color: $top-rated-primary;
+      box-shadow: 0 0 20px rgba($top-rated-primary, 0.3);
+    }
+    
+    .movie-card__title {
+      font-family: $font-secondary;
+      font-style: italic;
+    }
+  }
+  
+  &--upcoming {
+    border: 2px solid transparent;
+    
+    &:hover {
+      border-color: $upcoming-primary;
+      box-shadow: 0 0 20px rgba($upcoming-primary, 0.3);
+    }
+    
+    .movie-card__title {
+      font-family: $font-mono;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+  }
+  
+  // Wishlist button styles
+  &__wishlist-btn {
+    position: absolute;
+    top: $space-sm;
+    right: $space-sm;
+    background: rgba($primary-color, 0.8);
+    border: 1px solid $border-light;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $text-primary;
+    cursor: pointer;
+    transition: all $transition-fast;
+    backdrop-filter: blur(8px);
+    z-index: 2;
+    
+    &:hover {
+      background: rgba($primary-color, 0.95);
+      border-color: $wishlist-accent;
+      transform: scale(1.1);
+    }
+    
+    &--active {
+      background: rgba($wishlist-accent, 0.9);
+      border-color: $wishlist-accent;
+      color: white;
+      
+      &:hover {
+        background: rgba($wishlist-accent, 1);
+      }
+    }
+  }
+  
+  // Wishlist variant styles
+  &--wishlist {
+    .movie-card__content {
+      position: static;
+      transform: none;
+      background: $secondary-color;
+    }
+    
+    .movie-card__overlay {
+      display: none;
+    }
+    
+    .movie-card__wishlist-btn {
+      background: rgba($wishlist-accent, 0.9);
+      border-color: rgba($wishlist-accent, 0.5);
+      
+      &:hover {
+        background: rgba($wishlist-accent, 1);
+        border-color: rgba($wishlist-accent, 1);
+      }
+    }
+    
+    &:hover {
+      border-color: transparent;
+      box-shadow: $shadow-md;
+    }
+  }
+  
+  @media (max-width: $tablet) {
+    &__content {
+      position: static;
+      transform: none;
+      padding: $space-sm;
+      background: $secondary-color;
+    }
+    
+    &__overlay {
+      display: none;
+    }
+    
+    &:hover {
+      .movie-card__image {
+        transform: none;
+      }
+    }
+  }
+}

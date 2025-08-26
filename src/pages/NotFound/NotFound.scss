@@ -1,0 +1,53 @@
+.not-found {
+  min-height: calc(100vh - $header-height);
+  padding-top: $header-height;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $primary-color;
+  
+  &__content {
+    text-align: center;
+    max-width: 500px;
+    padding: $space-3xl $space-lg;
+  }
+  
+  &__title {
+    font-size: 6rem;
+    font-weight: 900;
+    color: $accent-color;
+    margin-bottom: $space-md;
+    line-height: 1;
+  }
+  
+  &__subtitle {
+    font-size: $font-size-2xl;
+    font-weight: 600;
+    color: $text-primary;
+    margin-bottom: $space-lg;
+  }
+  
+  &__message {
+    font-size: $font-size-lg;
+    color: $text-secondary;
+    margin-bottom: $space-2xl;
+    line-height: 1.5;
+  }
+  
+  &__home-link {
+    display: inline-flex;
+    align-items: center;
+    padding: $space-md $space-lg;
+    background: $accent-color;
+    color: $primary-color;
+    text-decoration: none;
+    border-radius: $radius-md;
+    font-weight: 600;
+    transition: all $transition-normal;
+    
+    &:hover {
+      background: darken($accent-color, 10%);
+      transform: translateY(-2px);
+    }
+  }
+}

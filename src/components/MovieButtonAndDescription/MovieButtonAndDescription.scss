@@ -1,0 +1,251 @@
+.movie-button-description {
+  display: flex;
+  flex-direction: column;
+  gap: $space-xl;
+
+  &__button-area {
+    .movie-button-description__wishlist-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: $space-sm;
+      padding: $space-md $space-lg;
+      background: $accent-color;
+      color: $primary-color;
+      border: none;
+      border-radius: $radius-md;
+      cursor: pointer;
+      font-size: $font-size-base;
+      font-weight: 600;
+      transition: transform $transition-normal, box-shadow $transition-normal, background-color $transition-normal;
+      text-align: center;
+      min-width: 200px;
+      width: 200px;
+      white-space: nowrap;
+      
+      // Loading/disabled state
+      &--loading {
+        pointer-events: none;
+        
+        span {
+          opacity: 0.7;
+        }
+      }
+      
+      &:disabled {
+        cursor: not-allowed;
+        opacity: 0.7;
+        transform: none !important;
+        
+        &:hover {
+          transform: none !important;
+        }
+      }
+      
+      // General hover (only for buttons without specific category classes)
+      &:hover:not(&--primary):not(&--secondary):not(&--accent) {
+        background: darken($accent-color, 10%);
+        transform: translateY(-2px);
+      }
+      
+      // Fallback added state for non-category buttons
+      &--added:not(&--primary):not(&--secondary):not(&--accent) {
+        background: $secondary-color;
+        color: $accent-color;
+      }
+      
+      svg {
+        width: 20px;
+        height: 20px;
+        flex-shrink: 0;
+        display: block;
+        margin: 0;
+      }
+      
+      span {
+        line-height: 1.2;
+        display: flex;
+        align-items: center;
+        margin: 0;
+        padding: 2px 0;
+      }
+
+      // Category-specific button styles
+      &--primary {
+        background: $popular-primary;
+        color: $primary-color;
+        font-family: $font-primary;
+        font-weight: 500;
+        border-radius: $radius-md;
+        border: 2px solid transparent;
+        box-shadow: 0 4px 12px rgba($popular-primary, 0.3);
+        transition: background-color $transition-normal, transform $transition-normal, box-shadow $transition-normal;
+        min-width: 200px;
+        width: 200px;
+        white-space: nowrap;
+        
+        &:hover {
+          background: darken($popular-primary, 8%);
+          transform: translateY(-1px);
+          box-shadow: 0 6px 16px rgba($popular-primary, 0.4);
+        }
+        
+        &.movie-button-description__wishlist-btn--added {
+          background: $secondary-color;
+          color: $popular-primary;
+          border: 2px solid $popular-primary;
+          
+          &:hover {
+            background: $popular-primary;
+            color: $primary-color;
+          }
+        }
+      }
+      
+      &--secondary {
+        background: $top-rated-primary;
+        color: $primary-color;
+        font-family: $font-secondary;
+        font-style: italic;
+        font-weight: 500;
+        border-radius: $radius-lg;
+        border: 2px solid $top-rated-primary;
+        box-shadow: 0 4px 12px rgba($top-rated-primary, 0.3);
+        transition: background-color $transition-normal, color $transition-normal, transform $transition-normal, box-shadow $transition-normal;
+        min-width: 200px;
+        width: 200px;
+        white-space: nowrap;
+        
+        &:hover {
+          background: transparent;
+          color: $top-rated-primary;
+          transform: translateY(-1px);
+          box-shadow: 0 6px 16px rgba($top-rated-primary, 0.4);
+        }
+        
+        &.movie-button-description__wishlist-btn--added {
+          background: $secondary-color;
+          color: $top-rated-primary;
+          border: 2px solid $top-rated-primary;
+          
+          &:hover {
+            background: $top-rated-primary;
+            color: $primary-color;
+          }
+        }
+      }
+      
+      &--accent {
+        background: transparent;
+        color: $upcoming-primary;
+        font-family: $font-mono;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-weight: 500;
+        font-size: $font-size-sm;
+        border: 2px solid $upcoming-primary;
+        border-radius: $radius-sm;
+        box-shadow: 0 4px 12px rgba($upcoming-primary, 0.3);
+        position: relative;
+        overflow: hidden;
+        transition: color $transition-normal, transform $transition-normal, box-shadow $transition-normal;
+        min-width: 200px;
+        width: 200px;
+        white-space: nowrap;
+        padding: $space-md $space-lg;
+        
+        &:before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: $upcoming-primary;
+          transition: left $transition-slow;
+          z-index: -1;
+          border-radius: $radius-sm;
+        }
+        
+        &:hover {
+          color: $primary-color;
+          transform: translateY(-1px);
+          box-shadow: 0 6px 16px rgba($upcoming-primary, 0.4);
+          
+          &:before {
+            left: 0;
+          }
+        }
+        
+        &.movie-button-description__wishlist-btn--added {
+          background: $upcoming-primary;
+          color: $primary-color;
+          
+          &:before {
+            left: 0;
+          }
+          
+          &:hover {
+            background: $secondary-color;
+            color: $upcoming-primary;
+            
+            &:before {
+              left: -100%;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &__description {
+    .movie-button-description__overview {
+      font-size: $font-size-base;
+      line-height: 1.6;
+      color: $text-primary;
+    }
+  }
+
+  // Category-specific styling
+  &--popular {
+    .movie-button-description__description {
+      font-family: $font-primary;
+      
+      .movie-button-description__overview {
+        font-family: $font-primary;
+        font-size: $font-size-base;
+        line-height: 1.6;
+        color: $text-primary;
+      }
+    }
+  }
+
+  &--top_rated {
+    .movie-button-description__description {
+      font-family: $font-secondary;
+      
+      .movie-button-description__overview {
+        font-family: $font-secondary;
+        font-size: $font-size-lg;
+        line-height: 1.7;
+        font-style: normal;
+        color: $text-primary;
+      }
+    }
+  }
+
+  &--upcoming {
+    .movie-button-description__description {
+      font-family: $font-mono;
+      
+      .movie-button-description__overview {
+        font-family: $font-mono;
+        font-size: $font-size-sm;
+        line-height: 1.5;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: $text-primary;
+      }
+    }
+  }
+}

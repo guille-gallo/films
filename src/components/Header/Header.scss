@@ -1,0 +1,106 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: $header-height;
+  background: rgba($primary-color, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid $secondary-color;
+  z-index: $z-header;
+  
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    padding: 0 $container-padding;
+    max-width: $container-max-width;
+    margin: 0 auto;
+  }
+  
+  &__logo {
+    font-size: $font-size-2xl;
+    font-weight: 700;
+    color: $brand-logo;
+    text-decoration: none;
+    transition: color $transition-fast;
+    
+    &:hover {
+      color: lighten($brand-logo, 10%);
+    }
+  }
+  
+  &__nav {
+    display: flex;
+    align-items: center;
+    gap: $space-xl;
+  }
+  
+  &__wishlist-btn {
+    position: relative;
+    background: none;
+    border: none;
+    color: $text-primary;
+    cursor: pointer;
+    padding: $space-md;
+    border-radius: $radius-md;
+    transition: all $transition-fast;
+    display: flex;
+    align-items: center;
+    gap: $space-sm;
+    
+    &:hover {
+      background: $secondary-color;
+      transform: translateY(-1px);
+    }
+    
+    &__icon {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+    
+    &__count {
+      background: $wishlist-accent;
+      color: white;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: $font-size-xs;
+      font-weight: 600;
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      
+      &--empty {
+        display: none;
+      }
+    }
+  }
+  
+  @media (max-width: $tablet) {
+    &__container {
+      padding: 0 $space-md;
+    }
+    
+    &__logo {
+      font-size: $font-size-xl;
+    }
+    
+    &__wishlist-btn {
+      padding: $space-sm;
+      
+      &__count {
+        top: 2px;
+        right: 2px;
+        width: 18px;
+        height: 18px;
+        font-size: 10px;
+      }
+    }
+  }
+}

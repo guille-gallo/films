@@ -1,0 +1,241 @@
+// Google Fonts imports for distinct category styling
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600&display=swap');
+
+// Global styles and resets
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: $font-primary;
+  background-color: $primary-color;
+  color: $text-primary;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+// Global utility classes
+.container {
+  max-width: $container-max-width;
+  margin: 0 auto;
+  padding: 0 $container-padding;
+}
+
+.section {
+  margin-bottom: $section-gap;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+// Skip links for screen readers and keyboard navigation
+.skip-links {
+  position: relative;
+  z-index: 1000;
+  
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 6px;
+    background: $accent-color;
+    color: white;
+    padding: 8px;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 600;
+    transition: top 0.3s;
+    
+    &:focus {
+      top: 6px;
+      outline: 2px solid rgba($text-primary, 0.8);
+      outline-offset: 1px;
+      box-shadow: 0 0 0 3px rgba($text-primary, 0.2);
+    }
+  }
+}
+
+// Main content area accessibility
+.main-content {
+  outline: none; // Remove browser default outline since we have custom focus management
+  
+  &:focus {
+    outline: none;
+  }
+}
+
+// Enhanced focus indicators - removed blue outline, using subtle approach
+
+button:focus,
+a:focus,
+[role="button"]:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 2px solid rgba($text-primary, 0.25); // lighter, more subtle
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px rgba($text-primary, 0.07); // less shadow
+  transition: outline-color 0.2s;
+}
+
+// Ensure focus is visible on interactive elements
+
+[tabindex="0"]:focus,
+[tabindex="-1"]:focus {
+  outline: 2px solid rgba($text-primary, 0.25);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px rgba($text-primary, 0.07);
+  transition: outline-color 0.2s;
+}
+
+// Loading states
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  
+  &__spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid $secondary-color;
+    border-top: 3px solid $accent-color;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+// Error states
+.error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  padding: $space-xl;
+  text-align: center;
+  
+  &__title {
+    font-size: $font-size-xl;
+    color: $accent-color;
+    margin-bottom: $space-md;
+  }
+  
+  &__message {
+    color: $text-secondary;
+    margin-bottom: $space-lg;
+  }
+  
+  &__retry {
+    background: $accent-color;
+    color: white;
+    border: none;
+    padding: $space-md $space-xl;
+    border-radius: $radius-md;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color $transition-fast;
+    
+    &:hover {
+      background: darken($accent-color, 10%);
+    }
+  }
+}
+
+// Responsive utilities
+.hide-mobile {
+  @media (max-width: $tablet) {
+    display: none !important;
+  }
+}
+
+.hide-desktop {
+  @media (min-width: calc(#{$tablet} + 1px)) {
+    display: none !important;
+  }
+}
+
+.show-mobile {
+  display: none !important;
+  
+  @media (max-width: $tablet) {
+    display: block !important;
+  }
+}
+
+// Smooth scrollbar styling
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: $secondary-color;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $text-muted;
+  border-radius: $radius-sm;
+  
+  &:hover {
+    background: $text-secondary;
+  }
+}
+
+/* Page Loading Fallback Styles */
+.page-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
+  gap: 1rem;
+
+  &__spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba($primary-color, 0.2);
+    border-top: 3px solid $primary-color;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+
+  &__text {
+    color: $text-secondary;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

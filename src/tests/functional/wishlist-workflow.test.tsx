@@ -1,5 +1,5 @@
 /**
- * FUNCTIONAL TESTS: WISHLIST WORKFLOWS (SIMPLIFIED)
+ * FUNCTIONAL TESTS: WISHLIST WORKFLOWS
  */
 
 import { describe, it, expect, beforeEach, vi } from 'vitest'

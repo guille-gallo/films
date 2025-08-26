@@ -16,8 +16,8 @@ React application for browsing movies using The Movie Database (TMDB) API.
 - **React 19** with TypeScript
 - **Vite** for build tooling
 - **TanStack Query** for API data fetching and caching
-- **React's built-in state** (useState) for local component state
-- **Zustand** for wishlist state management
+- **React's built-in hooks** (useState, useEffect, useCallback, useMemo, useRef) for local component state, side effects, and performance optimization
+- **Zustand** for global wishlist state management with persistence and cross-tab synchronization
 - **React Router** for navigation
 - **SASS** for styling
 

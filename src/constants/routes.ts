@@ -35,15 +35,6 @@ export const ROUTES = {
 } as const;
 
 /**
- * Route parameter names
- */
-export const ROUTE_PARAMS = {
-  MOVIE_ID: 'movieId',
-  ID: 'id',
-  CATEGORY: 'category'
-} as const;
-
-/**
  * Query parameter names
  */
 export const QUERY_PARAMS = {

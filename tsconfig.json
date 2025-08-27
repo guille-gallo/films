@@ -1,4 +1,6 @@
 {
+  // Base tsconfig for the application (used by Vite & type-checking)
+  // Test-only types (Jest, Testing Library) are configured in tsconfig.test.json
   "compilerOptions": {
     "target": "ES2022",
     "useDefineForClassFields": true,
@@ -20,15 +22,16 @@
     "noEmit": true,
     "jsx": "react-jsx",
 
-    /* Linting */
+    /* Linting / Safety */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
 
-    /* Testing */
-    "types": ["jest", "@testing-library/jest-dom"]
+  /* App runtime types */
+  "types": ["vite/client", "react", "react-dom"]
   },
-  "include": ["src", "**/*.test.ts", "**/*.test.tsx"]
+  "include": ["src"],
+  "exclude": ["__tests__", "src/tests", "dist"]
 }

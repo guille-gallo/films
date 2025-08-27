@@ -2,9 +2,9 @@
  * ===========================================
  * MOVIE UTILITIES
  * ===========================================
- * MOVIE CATEGORIES CONFIGURATION
  * 
- * Centralized configuration for all movie categories
+ * Movie-related utility functions and configuration.
+ * Includes category definitions, formatting helpers, and data transformations.
  */
 
 import type { MovieCategory } from '@/types';

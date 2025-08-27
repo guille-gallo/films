@@ -37,7 +37,7 @@ export const Homepage: React.FC = () => {
         className="homepage__content"
         aria-label={i18n.a11y.homepageSection}
       >
-        <h1 className="visually-hidden">Movies by Category</h1>
+        <h1 className="visually-hidden">{i18n.pages.homepage.moviesByCategory}</h1>
         
         <div className="homepage__section">
           <Carousel

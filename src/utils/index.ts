@@ -1,5 +1,24 @@
 /**
- * Utility functions for the Films Browser application
+ * ===========================================
+ * GENERAL UTILITY FUNCTIONS
+ * ===========================================
+ * 
+ * Collection of reusable utility functions for common operations across
+ * the Films Browser application.
+ * 
+ * USAGE:
+ * ```typescript
+ * import { debounce, formatDate, formatCurrency, storage } from '@/utils';
+ * 
+ * // Debounce a search function
+ * const debouncedSearch = debounce(searchMovies, 300);
+ * 
+ * // Format currency values
+ * const budget = formatCurrency(50000000); // "$50.0M"
+ * 
+ * // Safe localStorage operations
+ * const preferences = storage.get('user-prefs', {});
+ * ```
  */
 
 import { APP_CONFIG, ERROR_MESSAGES, i18n } from '@/constants';
@@ -11,11 +30,12 @@ import { APP_CONFIG, ERROR_MESSAGES, i18n } from '@/constants';
  * @param wait - Delay in milliseconds
  * @returns Debounced function
  */
-export const debounce = <T extends (...args: any[]) => any>(
+export const debounce = <T extends (...args: unknown[]) => unknown>(
   func: T,
   wait: number = APP_CONFIG.DEFAULTS.DEBOUNCE_DELAY
 ): (...args: Parameters<T>) => void => {
-  let timeout: NodeJS.Timeout;
+  // Use ReturnType<typeof setTimeout> for environment-agnostic timeout handle (avoids requiring NodeJS types)
+  let timeout: ReturnType<typeof setTimeout>;
   
   return (...args: Parameters<T>) => {
     clearTimeout(timeout);
@@ -66,13 +86,6 @@ export const truncateText = (text: string, maxLength: number): string => {
 };
 
 /**
- * Generate unique ID for components
- */
-export const generateId = (): string => {
-  return Math.random().toString(36).substr(2, 9);
-};
-
-/**
  * Check if an image URL is valid
  */
 export const isValidImageUrl = (url: string | null): boolean => {
@@ -107,33 +120,4 @@ export const storage = {
       console.warn(ERROR_MESSAGES.FAILED_TO_REMOVE_STORAGE, error);
     }
   }
-};
-
-/**
- * Array shuffle function using Fisher-Yates algorithm
- */
-export const shuffleArray = <T>(array: T[]): T[] => {
-  const shuffled = [...array];
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-  }
-  return shuffled;
-};
-
-/**
- * Create intersection observer for lazy loading
- */
-export const createIntersectionObserver = (
-  callback: (entries: IntersectionObserverEntry[]) => void,
-  options: IntersectionObserverInit = {}
-): IntersectionObserver => {
-  const defaultOptions: IntersectionObserverInit = {
-    root: null,
-    rootMargin: APP_CONFIG.DEFAULTS.INTERSECTION_ROOT_MARGIN,
-    threshold: 0.1,
-    ...options
-  };
-  
-  return new IntersectionObserver(callback, defaultOptions);
 };

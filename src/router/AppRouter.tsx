@@ -3,21 +3,10 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Header } from '@/components';
 import { ROUTES, APP_CONFIG, i18n } from '@/constants';
 
-// Lazy load page components for optimal bundle splitting
 const Homepage = React.lazy(() => import('@/pages/Homepage').then(module => ({ default: module.Homepage })));
 const MovieDetail = React.lazy(() => import('@/pages/MovieDetail').then(module => ({ default: module.MovieDetail })));
 const Wishlist = React.lazy(() => import('@/pages/Wishlist').then(module => ({ default: module.Wishlist })));
 const NotFound = React.lazy(() => import('@/pages/NotFound').then(module => ({ default: module.NotFound })));
-
-/**
- * Loading fallback component for lazy-loaded routes
- */
-const PageLoadingFallback: React.FC = () => (
-  <div className="page-loading" role="status" aria-label={i18n.loading.general}>
-    <div className="page-loading__spinner" />
-    <span className="page-loading__text">{i18n.loading.general}</span>
-  </div>
-);
 
 export const AppRouter: React.FC = () => {
   return (
@@ -40,7 +29,7 @@ export const AppRouter: React.FC = () => {
           className="main-content"
           aria-label={i18n.a11y.mainContentLabel}
         >
-          <Suspense fallback={<PageLoadingFallback />}>
+          <Suspense fallback={null}>
             <Routes>
               <Route path={ROUTES.PATTERNS.HOME} element={<Homepage />} />
               <Route path={ROUTES.PATTERNS.MOVIE_DETAIL_WITH_PARAMS} element={<MovieDetail />} />

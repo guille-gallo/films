@@ -3,14 +3,16 @@
  * MOVIE CARD COMPONENT
  * ===========================================
  * 
- * A reusable movie card component
+ * Individual movie card component displaying poster, title, and basic info.
+ * Handles wishlist operations and navigation to movie details.
  * 
  * USAGE:
  * ```tsx
  * <MovieCard 
  *   movie={movieData}
  *   category={categoryData}
- *   onClick={() => navigateToMovie(movie.id)}
+ *   onClick={() => navigate(`/movie/${movie.id}`)}
+ *   showWishlistAction={true}
  * />
  * ```
  */
@@ -101,7 +103,7 @@ export const MovieCard: React.FC<MovieCardProps> = React.memo(({
               if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
                 e.stopPropagation();
-                handleWishlistAction(e as any);
+                handleWishlistAction(e as unknown as React.MouseEvent<HTMLButtonElement>);
               }
             }}
             aria-label={inWishlist 
@@ -145,7 +147,7 @@ export const MovieCard: React.FC<MovieCardProps> = React.memo(({
             className="visually-hidden"
             aria-label={i18n.a11y.movieOverviewLabel}
           >
-            {movie.overview || 'No description available.'}
+            {movie.overview || i18n.format.notAvailable}
           </div>
         </div>
       </div>

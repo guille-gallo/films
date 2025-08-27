@@ -14,16 +14,16 @@ import { WISHLIST_STORE } from '@/constants';
  * CROSS-TAB SYNCHRONIZATION SETUP
  * Listen for storage changes in other tabs and sync state
  */
-const setupCrossTabSync = (store: any) => {
+const setupCrossTabSync = (store: { setState: (state: Partial<WishlistStore>) => void }) => {
   if (typeof window !== 'undefined') {
     window.addEventListener('storage', (e) => {
-      if (e.key === 'films-wishlist' && e.newValue) {
+      if (e.key === WISHLIST_STORE.PERSISTENCE_KEY && e.newValue) {
         try {
           const parsed = JSON.parse(e.newValue);
           const wishlist = parsed.state.wishlist || [];
           
           // Reconstruct Set and movieStatuses from updated wishlist
-          const wishlistSet = new Set(wishlist.map((movie: Movie) => movie.id));
+          const wishlistSet = new Set<number>(wishlist.map((movie: Movie) => movie.id));
           const movieStatuses: Record<number, boolean> = {};
           wishlist.forEach((movie: Movie) => {
             movieStatuses[movie.id] = true;
@@ -167,7 +167,7 @@ setupCrossTabSync(wishlistStore);
 if (typeof window !== 'undefined') {
   window.addEventListener('focus', () => {
     // Refresh state when user focuses this tab
-    const stored = localStorage.getItem('films-wishlist');
+    const stored = localStorage.getItem(WISHLIST_STORE.PERSISTENCE_KEY);
     if (stored) {
       try {
         const parsed = JSON.parse(stored);

@@ -51,15 +51,20 @@ export const i18n = {
    * Page-specific content and copy
    */
   pages: {
+    homepage: {
+      moviesByCategory: 'Movies by Category'
+    },
     wishlist: {
       title: 'Wishlist',
       empty: {
         icon: '💔',
         title: 'Your wishlist is empty',
         message: `Start exploring movies and add your favorites to your wishlist. 
-          You'll be able to keep track of movies you want to watch later.`
+          You'll be able to keep track of movies you want to watch later.`,
+        emptyWishlistAria: 'Empty wishlist'
       },
-      clearConfirmation: 'Are you sure you want to clear your entire wishlist?'
+      clearConfirmation: 'Are you sure you want to clear your entire wishlist?',
+      clearWarning: 'This will remove all movies from your wishlist and cannot be undone'
     },
     notFound: {
       title: 'Page Not Found',
@@ -135,6 +140,8 @@ export const i18n = {
     wishlistSection: 'Wishlist section',
     homepageSection: 'Homepage movie categories',
     movieDetailSection: 'Movie details',
+    movieActionsSection: 'Movie Actions and Description',
+    additionalInfoSection: 'Additional Information',
     carouselInstructions: 'Use arrow keys to navigate through movies, Enter to select',
     ratingLabel: (rating: string, votes: number) => `Rating ${rating} out of 10 based on ${votes} votes`,
     runtimeLabel: (runtime: string) => `Runtime ${runtime}`,
@@ -153,6 +160,3 @@ export const i18n = {
     }
   }
 } as const;
-
-// Export type for TypeScript intellisense
-export type I18nKeys = typeof i18n;

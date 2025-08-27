@@ -82,14 +82,6 @@ export interface MovieDetails extends Movie {
   tagline: string;
 }
 
-export interface WishlistItem {
-  movieId: number;
-  title: string;
-  poster_path: string | null;
-  addedAt: string;
-  category: string;
-}
-
 export interface CarouselProps {
   category: MovieCategory;
   movies: Movie[];
@@ -107,9 +99,4 @@ export interface MovieCardProps {
   inWishlist?: boolean;
   onWishlistToggle?: () => void;
   variant?: 'default' | 'wishlist' | 'compact';
-}
-
-export interface MovieDetailPageProps {
-  movieId: string;
-  category: string;
 }

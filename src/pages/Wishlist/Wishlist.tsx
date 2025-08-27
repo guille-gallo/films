@@ -46,7 +46,7 @@ export const Wishlist: React.FC = () => {
             <div 
               className="wishlist__empty__icon"
               role="img"
-              aria-label="Empty wishlist"
+              aria-label={i18n.pages.wishlist.empty.emptyWishlistAria}
             >
               {i18n.pages.wishlist.empty.icon}
             </div>
@@ -141,7 +141,7 @@ export const Wishlist: React.FC = () => {
             >
               {i18n.buttons.clearAll}
               <span id="clear-warning" className="visually-hidden">
-                This will remove all movies from your wishlist and cannot be undone
+                {i18n.pages.wishlist.clearWarning}
               </span>
             </button>
           </div>

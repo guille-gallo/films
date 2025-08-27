@@ -35,26 +35,4 @@ export const TMDB_API = {
     MOVIE_DETAILS: (id: number) => `/movie/${id}`,
     SEARCH: '/search/movie',
   },
-
-  /**
-   * Available image sizes for different use cases
-   * - w200: Thumbnails
-   * - w400: Card images  
-   * - w500: Detail images
-   * - w780: Large images
-   * - original: Full resolution
-   */
-  IMAGE_SIZES: {
-    THUMBNAIL: 'w200',
-    CARD: 'w400', 
-    DETAIL: 'w500',
-    LARGE: 'w780',
-    ORIGINAL: 'original',
-  } as const,
 } as const;
-
-/**
- * Type definitions for API constants
- */
-export type ImageSize = typeof TMDB_API.IMAGE_SIZES[keyof typeof TMDB_API.IMAGE_SIZES];
-export type EndpointPath = keyof typeof TMDB_API.ENDPOINTS;

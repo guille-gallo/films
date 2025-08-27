@@ -1,7 +1,3 @@
-/**
- * MOVIE UTILITIES UNIT TESTS
- */
-
 import { 
   MOVIE_CATEGORIES,
   getImageUrl,

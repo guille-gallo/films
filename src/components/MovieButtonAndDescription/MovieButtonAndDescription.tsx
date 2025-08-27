@@ -53,3 +53,5 @@ export const MovieButtonAndDescription: React.FC<MovieButtonAndDescriptionProps>
     </div>
   );
 });
+
+MovieButtonAndDescription.displayName = 'MovieButtonAndDescription';

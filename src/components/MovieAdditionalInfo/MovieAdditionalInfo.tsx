@@ -130,3 +130,5 @@ export const MovieAdditionalInfo: React.FC<MovieAdditionalInfoProps> = React.mem
     </section>
   );
 });
+
+MovieAdditionalInfo.displayName = 'MovieAdditionalInfo';

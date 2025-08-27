@@ -100,7 +100,7 @@ export const MovieDetail: React.FC = () => {
           className="movie-detail__actions-section"
         >
           <h2 id="movie-actions-title" className="visually-hidden">
-            Movie Actions and Description
+            {i18n.a11y.movieActionsSection}
           </h2>
           
           <MovieButtonAndDescription 

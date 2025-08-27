@@ -1,18 +1,21 @@
 {
+  // Test tsconfig: extends base but reintroduces jest/testing types & Node resolution
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "verbatimModuleSyntax": false,
     "allowImportingTsExtensions": false,
-    "noEmit": false,
+    "noEmit": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "isolatedModules": false,
     "module": "ESNext",
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "types": ["jest", "@testing-library/jest-dom", "node"]
   },
   "include": [
     "__tests__/**/*",
-    "src/**/*"
+    "src/**/*.ts",
+    "src/**/*.tsx"
   ],
   "exclude": [
     "node_modules",

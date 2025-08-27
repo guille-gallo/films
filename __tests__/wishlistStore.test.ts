@@ -1,7 +1,3 @@
-/**
- * WISHLIST STORE TESTS
- */
-
 import { wishlistStore } from '../src/stores/wishlistStore';
 
 // Mock movie data for testing

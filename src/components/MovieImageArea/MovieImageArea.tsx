@@ -45,3 +45,5 @@ export const MovieImageArea: React.FC<MovieImageAreaProps> = React.memo(({
     </div>
   );
 });
+
+MovieImageArea.displayName = 'MovieImageArea';

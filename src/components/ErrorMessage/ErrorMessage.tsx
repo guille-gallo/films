@@ -8,11 +8,8 @@
  * USAGE:
  * ```tsx
  * <ErrorMessage
- *   type="404"
- *   title="Movie Not Found"
- *   message="The movie you're looking for doesn't exist."
+ *   type="not-found"
  *   onRetry={() => refetchMovie()}
- *   showRetry={true}
  * />
  * ```
  */

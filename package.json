@@ -14,7 +14,6 @@
     "test:functional:watch": "vitest",
     "test:functional:ui": "vitest --ui",
     "test:all": "npm run test && npm run test:functional",
-    "lint": "eslint src --ext .ts,.tsx --report-unused-disable-directives --max-warnings 0",
     "type-check": "tsc --noEmit"
   },
   "devDependencies": {

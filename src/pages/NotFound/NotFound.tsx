@@ -13,7 +13,7 @@
 
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import ErrorMessage from '@/components/ErrorMessage/ErrorMessage';
+import { ErrorMessage } from '@/components';
 import { i18n, ROUTES } from '@/constants';
 
 export const NotFound: React.FC = () => {

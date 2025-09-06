@@ -14,12 +14,8 @@
 import React from 'react';
 import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
 import { useMovieDetails } from '@/hooks/useMovieDetails';
-import { getCategoryById } from '@/utils/movieUtils';
-import { MovieImageArea } from '@/components/MovieImageArea/MovieImageArea';
-import { MovieButtonAndDescription } from '@/components/MovieButtonAndDescription/MovieButtonAndDescription';
-import { MovieAdditionalInfo } from '@/components/MovieAdditionalInfo/MovieAdditionalInfo';
-import { WishlistButton } from '@/components/WishlistButton/WishlistButton';
-import ErrorMessage from '@/components/ErrorMessage/ErrorMessage';
+import { getCategoryById, getImageUrl, formatRating, formatRuntime, getYearFromDate } from '@/utils/movieUtils';
+import { Image, Description, InfoGrid, ActionArea, WishlistButton, ErrorMessage, StarIcon } from '@/components';
 import { ROUTES, QUERY_PARAMS, i18n } from '@/constants';
 import './MovieDetail.scss';
 
@@ -79,6 +75,34 @@ export const MovieDetail: React.FC = () => {
     );
   }
 
+  const posterUrl = getImageUrl(movie.poster_path, 'w500');
+  const rating = formatRating(movie.vote_average);
+  const releaseYear = getYearFromDate(movie.release_date);
+  const runtime = movie.runtime ? formatRuntime(movie.runtime) : 'N/A';
+
+  const infoItems = [
+    { 
+      label: 'Release Year', 
+      value: releaseYear,
+      ariaLabel: i18n.a11y.releaseYearLabel(releaseYear)
+    },
+    { 
+      label: 'Runtime', 
+      value: runtime,
+      ariaLabel: i18n.a11y.runtimeLabel(runtime)
+    },
+    { 
+      label: 'Rating', 
+      value: (
+        <div className="rating-display">
+          <StarIcon />
+          <span>{rating}</span>
+        </div>
+      ),
+      ariaLabel: i18n.a11y.ratingLabel(rating, movie.vote_count)
+    }
+  ];
+
   return (
     <div className={`movie-detail movie-detail--${categoryId}`}>
       <main 
@@ -90,9 +114,11 @@ export const MovieDetail: React.FC = () => {
           {movie.title}
         </h1>
         
-        <MovieImageArea 
-          posterPath={movie.poster_path}
-          title={movie.title}
+        <Image 
+          src={posterUrl}
+          alt={`${movie.title} poster`}
+          fallback="🎬"
+          className="movie-image-area__poster"
         />
 
         <section 
@@ -103,16 +129,21 @@ export const MovieDetail: React.FC = () => {
             {i18n.a11y.movieActionsSection}
           </h2>
           
-          <MovieButtonAndDescription 
-            movie={movie}
-            category={category}
-          >
+          <ActionArea className="movie-button-description__button-area">
             <WishlistButton
               movie={movie}
               category={category}
               className="movie-button-description__wishlist-btn"
             />
-          </MovieButtonAndDescription>
+          </ActionArea>
+          
+          <Description 
+            text={movie.overview}
+            fallback="No overview available for this movie."
+            title="Movie Description"
+            aria-label={i18n.a11y.movieOverviewLabel}
+            className="movie-button-description__overview"
+          />
         </section>
       </main>
 
@@ -120,7 +151,12 @@ export const MovieDetail: React.FC = () => {
         aria-labelledby="additional-info-title"
         className="movie-detail__aside"
       >
-        <MovieAdditionalInfo movie={movie} />
+        <InfoGrid 
+          items={infoItems}
+          title="Movie Information Details"
+          aria-label="Movie details"
+          className="movie-additional-info"
+        />
       </aside>
     </div>
   );

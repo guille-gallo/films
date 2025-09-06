@@ -20,8 +20,8 @@
 
 import React, { useRef, useState, useEffect, useCallback, useMemo } from 'react';
 import type { CarouselProps } from '@/types';
-import { MovieCard } from '@/components/MovieCard/MovieCard';
-import { ChevronLeftIcon, ChevronRightIcon } from '@/components/Icons';
+import { MovieCard } from '@/components/features/movie/MovieCard/MovieCard';
+import { ChevronLeftIcon, ChevronRightIcon } from '@/components';
 import { i18n } from '@/constants';
 import './Carousel.scss';
 

@@ -16,17 +16,11 @@
  * ```
  */
 
-// Core UI Components
-export { Header } from './Header';
-export { Carousel } from './Carousel';
-export { MovieCard } from './MovieCard';
-export { default as ErrorMessage } from './ErrorMessage';
+// Layout Components (navigation, structure, layout)
+export * from './layout';
 
-// Movie Detail Components
-export { MovieImageArea } from './MovieImageArea';
-export { MovieButtonAndDescription } from './MovieButtonAndDescription';
-export { MovieAdditionalInfo } from './MovieAdditionalInfo';
-export { WishlistButton } from './WishlistButton';
+// UI Primitives (simple, reusable components including icons)
+export * from './ui';
 
-// Icon Components
-export * from './Icons';
+// Feature Components (domain-specific functionality)
+export * from './features';

@@ -12,21 +12,17 @@
  */
 
 import React, { useCallback } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useWishlist } from '@/hooks/useWishlist';
-import { MovieCard } from '@/components/MovieCard/MovieCard';
-import { HeartIcon } from '@/components/Icons';
+import { useMovieNavigation } from '@/hooks/useMovieNavigation';
+import { MovieCard, HeartIcon } from '@/components';
 import { getCategoryById, MOVIE_CATEGORIES } from '@/utils/movieUtils';
 import { ROUTES, i18n } from '@/constants';
 import './Wishlist.scss';
 
 export const Wishlist: React.FC = () => {
-  const navigate = useNavigate();
+  const handleItemClick = useMovieNavigation();
   const { wishlist, removeFromWishlist, clearWishlist } = useWishlist();
-
-  const handleItemClick = useCallback((movieId: number, category: string) => {
-    navigate(ROUTES.MOVIE_DETAIL(movieId, category));
-  }, [navigate]);
 
   const handleClearWishlist = useCallback(() => {
     if (window.confirm(i18n.pages.wishlist.clearConfirmation)) {

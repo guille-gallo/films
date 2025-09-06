@@ -14,7 +14,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useWishlist } from '@/hooks/useWishlist';
-import { HeartIcon } from '@/components/Icons';
+import { HeartIcon } from '@/components';
 import { ROUTES, i18n } from '@/constants';
 import './Header.scss';
 

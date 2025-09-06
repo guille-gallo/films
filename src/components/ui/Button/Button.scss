@@ -1,0 +1,112 @@
+@import "@/styles/variables.scss";
+
+/**
+ * ===========================================
+ * BUTTON STYLES
+ * ===========================================
+ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: none;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  // Variants
+  &--primary {
+    background: $accent-color;
+    color: $text-primary;
+    
+    &:hover:not(:disabled) {
+      background: darken($accent-color, 10%);
+    }
+  }
+  
+  &--secondary {
+    background: $secondary-color;
+    color: $text-primary;
+    
+    &:hover:not(:disabled) {
+      background: darken($secondary-color, 10%);
+    }
+  }
+  
+  &--danger {
+    background: $state-destructive;
+    color: $text-primary;
+    
+    &:hover:not(:disabled) {
+      background: darken($state-destructive, 10%);
+    }
+  }
+  
+  &--ghost {
+    background: transparent;
+    color: $text-primary;
+    border: 1px solid $border-light;
+    
+    &:hover:not(:disabled) {
+      background: $surface-secondary;
+    }
+  }
+  
+  // Sizes
+  &--small {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.875rem;
+  }
+  
+  &--medium {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+  }
+  
+  &--large {
+    padding: 0.75rem 1.5rem;
+    font-size: 1.125rem;
+  }
+  
+  // Modifiers
+  &--full-width {
+    width: 100%;
+  }
+  
+  &--loading {
+    cursor: wait;
+  }
+  
+  &__spinner {
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid transparent;
+    border-top: 2px solid currentColor;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+  
+  &__content--hidden {
+    opacity: 0;
+  }
+  
+  &__content {
+    opacity: 1;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

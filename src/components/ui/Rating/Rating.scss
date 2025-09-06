@@ -1,0 +1,83 @@
+/**
+ * ===========================================
+ * RATING STYLES
+ * ===========================================
+ */
+
+.rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  
+  &__stars {
+    display: flex;
+    gap: 0.125rem;
+  }
+  
+  &__star-container {
+    position: relative;
+    display: inline-block;
+  }
+  
+  &__star {
+    color: var(--star-empty-color, #e0e0e0);
+    
+    &--filled {
+      color: var(--star-filled-color, #ffc107);
+    }
+    
+    &--empty {
+      color: var(--star-empty-color, #e0e0e0);
+    }
+  }
+  
+  &__star-partial {
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    
+    .rating__star {
+      color: var(--star-filled-color, #ffc107);
+    }
+  }
+  
+  &__value {
+    font-weight: 500;
+    color: var(--text-primary, #333);
+  }
+  
+  // Size variants
+  &--small {
+    gap: 0.25rem;
+    
+    .rating__stars {
+      gap: 0.0625rem;
+    }
+    
+    .rating__value {
+      font-size: 0.875rem;
+    }
+  }
+  
+  &--medium {
+    gap: 0.5rem;
+    
+    .rating__value {
+      font-size: 1rem;
+    }
+  }
+  
+  &--large {
+    gap: 0.75rem;
+    
+    .rating__stars {
+      gap: 0.25rem;
+    }
+    
+    .rating__value {
+      font-size: 1.125rem;
+      font-weight: 600;
+    }
+  }
+}

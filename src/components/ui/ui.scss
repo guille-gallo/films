@@ -1,0 +1,68 @@
+/**
+ * ===========================================
+ * UI PRIMITIVES STYLES
+ * ===========================================
+ */
+
+// Image component styles
+.image-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #ccc;
+  color: #666;
+  font-size: 14px;
+  min-height: 100px;
+}
+
+// Description component styles
+.description {
+  line-height: 1.6;
+  
+  &.description--truncated {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+// InfoGrid component styles
+.info-grid {
+  &__container {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  &__item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  &__label {
+    font-weight: 600;
+    color: var(--text-secondary, #666);
+  }
+
+  &__value {
+    color: var(--text-primary, #333);
+  }
+}
+
+// ActionArea component styles
+.action-area {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  
+  &.action-area--vertical {
+    flex-direction: column;
+  }
+  
+  &.action-area--center {
+    justify-content: center;
+  }
+}

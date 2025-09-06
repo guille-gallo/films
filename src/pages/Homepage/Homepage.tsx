@@ -11,25 +11,21 @@
  * ```
  */
 
-import React, { useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
 import { Carousel } from '@/components';
 import { useMovies } from '@/hooks/useMovies';
+import { useMovieNavigation } from '@/hooks/useMovieNavigation';
 import { MOVIE_CATEGORIES } from '@/utils/movieUtils';
-import { ROUTES, i18n } from '@/constants';
+import { i18n } from '@/constants';
 import './Homepage.scss';
 
 export const Homepage: React.FC = () => {
-  const navigate = useNavigate();
+  const handleMovieClick = useMovieNavigation();
   
   // Fetch movies for all categories
   const popularMovies = useMovies('popular');
   const topRatedMovies = useMovies('top_rated');
   const upcomingMovies = useMovies('upcoming');
-
-  const handleMovieClick = useCallback((movieId: number, categoryId: string) => {
-    navigate(ROUTES.MOVIE_DETAIL(movieId, categoryId));
-  }, [navigate]);
 
   return (
     <div className="homepage">

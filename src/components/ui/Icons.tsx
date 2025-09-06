@@ -7,7 +7,7 @@
  * 
  * USAGE:
  * ```typescript
- * import { StarIcon, HeartIcon, BackIcon } from '@/components/Icons';
+ * import { StarIcon, HeartIcon, BackIcon } from '@/components';
  * 
  * <StarIcon className="my-star-icon" />
  * <HeartIcon filled={true} />

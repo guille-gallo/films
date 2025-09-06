@@ -4,6 +4,8 @@
  * ===========================================
  */
 
+@import "@/styles/variables.scss";
+
 // Image component styles
 .image-fallback {
   display: flex;
@@ -32,23 +34,53 @@
 .info-grid {
   &__container {
     display: grid;
-    gap: 0.75rem;
+    gap: $space-md;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    
+    @media (max-width: $tablet) {
+      grid-template-columns: 1fr;
+    }
   }
 
   &__item {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 1rem;
-    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: $space-xs;
+    padding: $space-md;
+    background: $secondary-color;
+    border-radius: $radius-md;
+    border: 1px solid $border-light;
+    transition: all $transition-fast;
+    
+    &:hover {
+      border-color: $accent-color;
+      box-shadow: $shadow-sm;
+    }
   }
 
   &__label {
     font-weight: 600;
-    color: var(--text-secondary, #666);
+    color: $text-secondary;
+    font-size: $font-size-xs;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
   }
 
   &__value {
-    color: var(--text-primary, #333);
+    color: $text-primary;
+    font-size: $font-size-sm;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+  
+  @media (max-width: $tablet) {
+    &__container {
+      gap: $space-sm;
+    }
+    
+    &__item {
+      padding: $space-sm;
+    }
   }
 }
 

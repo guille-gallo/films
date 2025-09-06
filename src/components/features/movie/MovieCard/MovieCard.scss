@@ -235,9 +235,11 @@
   @media (max-width: $tablet) {
     &__content {
       position: static;
-      transform: none;
+      transform: none !important;
       padding: $space-sm;
       background: $secondary-color;
+      border-radius: 0 0 $radius-md $radius-md;
+      opacity: 1;
     }
     
     &__overlay {
@@ -246,6 +248,10 @@
     
     &:hover {
       .movie-card__image {
+        transform: none;
+      }
+      
+      .movie-card__content {
         transform: none;
       }
     }

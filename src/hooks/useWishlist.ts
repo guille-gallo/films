@@ -16,9 +16,8 @@ import type { Movie } from '@/types';
 import { wishlistStore } from '@/stores';
 
 export const useWishlist = () => {
-  // Subscribe to store
+  // Subscribe to store - only need the wishlist array
   const wishlist = wishlistStore((state) => state.wishlist);
-  const movieStatuses = wishlistStore((state) => state.movieStatuses);
 
   // Actions
   const addToWishlist = useCallback((movie: Movie) => {
@@ -33,10 +32,10 @@ export const useWishlist = () => {
     wishlistStore.getState().clearWishlist();
   }, []);
 
-  // Utility functions
+  // Utility functions - use the store's optimized methods
   const isInWishlist = useCallback((movieId: number): boolean => {
-    return movieStatuses[movieId] ?? false;
-  }, [movieStatuses]);
+    return wishlistStore.getState().isInWishlist(movieId);
+  }, []);
 
   const toggleWishlist = useCallback((movie: Movie) => {
     if (isInWishlist(movie.id)) {

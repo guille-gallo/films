@@ -123,7 +123,7 @@ export const MovieDetail: React.FC = () => {
 
         <section 
           aria-labelledby="movie-actions-title"
-          className="movie-detail__actions-section"
+          className={`movie-detail__actions-section movie-button-description movie-button-description--${categoryId}`}
         >
           <h2 id="movie-actions-title" className="visually-hidden">
             {i18n.a11y.movieActionsSection}
@@ -137,13 +137,15 @@ export const MovieDetail: React.FC = () => {
             />
           </ActionArea>
           
-          <Description 
-            text={movie.overview}
-            fallback="No overview available for this movie."
-            title="Movie Description"
-            aria-label={i18n.a11y.movieOverviewLabel}
-            className="movie-button-description__overview"
-          />
+          <div className="movie-button-description__description">
+            <Description 
+              text={movie.overview}
+              fallback="No overview available for this movie."
+              title="Movie Description"
+              aria-label={i18n.a11y.movieOverviewLabel}
+              className="movie-button-description__overview"
+            />
+          </div>
         </section>
       </main>
 

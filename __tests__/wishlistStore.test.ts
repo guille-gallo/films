@@ -23,9 +23,7 @@ describe('WishlistStore - Core Functionality', () => {
   beforeEach(() => {
     // Reset store to clean state
     wishlistStore.setState({
-      wishlist: [],
-      wishlistSet: new Set(),
-      movieStatuses: {}
+      wishlist: []
     });
   });
 
@@ -33,8 +31,6 @@ describe('WishlistStore - Core Functionality', () => {
     it('should start with empty state', () => {
       const state = wishlistStore.getState();
       expect(state.wishlist).toEqual([]);
-      expect(state.wishlistSet.size).toBe(0);
-      expect(state.movieStatuses).toEqual({});
     });
   });
 
@@ -50,25 +46,24 @@ describe('WishlistStore - Core Functionality', () => {
       expect(state.wishlist[0]).toEqual(movie);
     });
 
-    it('should update wishlistSet for fast lookups', () => {
+    it('should update movie status for fast lookups', () => {
       const movie = createTestMovie(123);
       const { addToWishlist } = wishlistStore.getState();
       
       addToWishlist(movie);
       
       const state = wishlistStore.getState();
-      expect(state.wishlistSet.has(123)).toBe(true);
-      expect(state.wishlistSet.size).toBe(1);
+      expect(state.getMovieStatus(123)).toBe(true);
     });
 
-    it('should update movieStatuses for performance', () => {
+    it('should update isInWishlist for performance', () => {
       const movie = createTestMovie(123);
       const { addToWishlist } = wishlistStore.getState();
       
       addToWishlist(movie);
       
       const state = wishlistStore.getState();
-      expect(state.movieStatuses[123]).toBe(true);
+      expect(state.isInWishlist(123)).toBe(true);
     });
 
     it('should not add duplicate movies', () => {
@@ -80,7 +75,6 @@ describe('WishlistStore - Core Functionality', () => {
       
       const state = wishlistStore.getState();
       expect(state.wishlist).toHaveLength(1);
-      expect(state.wishlistSet.size).toBe(1);
     });
 
     it('should add multiple different movies', () => {
@@ -93,9 +87,8 @@ describe('WishlistStore - Core Functionality', () => {
       
       const state = wishlistStore.getState();
       expect(state.wishlist).toHaveLength(2);
-      expect(state.wishlistSet.size).toBe(2);
-      expect(state.wishlistSet.has(123)).toBe(true);
-      expect(state.wishlistSet.has(456)).toBe(true);
+      expect(state.isInWishlist(123)).toBe(true);
+      expect(state.isInWishlist(456)).toBe(true);
     });
   });
 
@@ -115,7 +108,7 @@ describe('WishlistStore - Core Functionality', () => {
       expect(state.wishlist[0].id).toBe(456);
     });
 
-    it('should update wishlistSet when removing', () => {
+    it('should update movie status when removing', () => {
       const movie = createTestMovie(123);
       const { addToWishlist, removeFromWishlist } = wishlistStore.getState();
       
@@ -123,19 +116,19 @@ describe('WishlistStore - Core Functionality', () => {
       removeFromWishlist(123);
       
       const state = wishlistStore.getState();
-      expect(state.wishlistSet.has(123)).toBe(false);
-      expect(state.wishlistSet.size).toBe(0);
+      expect(state.isInWishlist(123)).toBe(false);
+      expect(state.wishlist).toHaveLength(0);
     });
 
-    it('should remove from movieStatuses', () => {
+    it('should remove from movie statuses', () => {
       const movie = createTestMovie(123);
       const { addToWishlist, removeFromWishlist } = wishlistStore.getState();
       
       addToWishlist(movie);
-      expect(wishlistStore.getState().movieStatuses[123]).toBe(true);
+      expect(wishlistStore.getState().getMovieStatus(123)).toBe(true);
       
       removeFromWishlist(123);
-      expect(wishlistStore.getState().movieStatuses[123]).toBeUndefined();
+      expect(wishlistStore.getState().getMovieStatus(123)).toBe(false);
     });
 
     it('should handle removing non-existent movie', () => {
@@ -149,7 +142,7 @@ describe('WishlistStore - Core Functionality', () => {
       
       const stateAfter = wishlistStore.getState();
       expect(stateAfter.wishlist).toEqual(stateBefore.wishlist);
-      expect(stateAfter.wishlistSet.size).toBe(stateBefore.wishlistSet.size);
+      expect(stateAfter.wishlist.length).toBe(stateBefore.wishlist.length);
     });
   });
 
@@ -186,26 +179,20 @@ describe('WishlistStore - Core Functionality', () => {
       
       const state = wishlistStore.getState();
       expect(state.wishlist).toEqual([]);
-      expect(state.wishlistSet.size).toBe(0);
-      expect(state.movieStatuses).toEqual({});
     });
   });
 
   describe('Performance Optimizations', () => {
-    it('should use Set for O(1) lookups', () => {
+    it('should use array-based lookups efficiently', () => {
       const movie = createTestMovie(123);
       const { addToWishlist } = wishlistStore.getState();
       
       addToWishlist(movie);
       
       const state = wishlistStore.getState();
-      // Spy on Set.has to ensure O(1) lookup is used
-      const setSpy = jest.spyOn(state.wishlistSet, 'has');
-      
-      state.isInWishlist(123);
-      expect(setSpy).toHaveBeenCalledWith(123);
-      
-      setSpy.mockRestore();
+      // Verify that lookups work correctly
+      expect(state.isInWishlist(123)).toBe(true);
+      expect(state.isInWishlist(999)).toBe(false);
     });
 
     it('should maintain data structure consistency', () => {
@@ -218,12 +205,9 @@ describe('WishlistStore - Core Functionality', () => {
       
       // All data structures should be consistent
       expect(state.wishlist).toHaveLength(1);
-      expect(state.wishlistSet.size).toBe(1);
-      expect(Object.keys(state.movieStatuses)).toHaveLength(1);
-      
       expect(state.wishlist[0].id).toBe(123);
-      expect(state.wishlistSet.has(123)).toBe(true);
-      expect(state.movieStatuses[123]).toBe(true);
+      expect(state.isInWishlist(123)).toBe(true);
+      expect(state.getMovieStatus(123)).toBe(true);
     });
   });
 });

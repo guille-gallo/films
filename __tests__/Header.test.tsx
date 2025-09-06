@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { Header } from '../src/components/Header/Header';
+import { Header } from '../src/components/layout/Header/Header';
 
 const renderWithProviders = (component: React.ReactElement) => {
   const queryClient = new QueryClient({

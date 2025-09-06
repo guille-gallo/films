@@ -104,6 +104,57 @@
   border-top: 4px solid $upcoming-primary;
 }
 
+// Category-specific styling for movie details
+.movie-detail {
+  &--popular {
+    h1, h2, h3 {
+      color: $popular-primary;
+      font-family: $font-primary;
+    }
+    
+    .action-area__button {
+      background: $popular-primary;
+      
+      &:hover {
+        background: darken($popular-primary, 10%);
+      }
+    }
+  }
+  
+  &--top_rated {
+    h1, h2, h3 {
+      color: $top-rated-primary;
+      font-family: $font-secondary;
+      font-style: italic;
+    }
+    
+    .action-area__button {
+      background: $top-rated-primary;
+      
+      &:hover {
+        background: darken($top-rated-primary, 10%);
+      }
+    }
+  }
+  
+  &--upcoming {
+    h1, h2, h3 {
+      color: $upcoming-primary;
+      font-family: $font-mono;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .action-area__button {
+      background: $upcoming-primary;
+      
+      &:hover {
+        background: darken($upcoming-primary, 10%);
+      }
+    }
+  }
+}
+
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }

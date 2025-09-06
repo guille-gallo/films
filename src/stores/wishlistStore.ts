@@ -22,19 +22,8 @@ const setupCrossTabSync = (store: { setState: (state: Partial<WishlistStore>) =>
           const parsed = JSON.parse(e.newValue);
           const wishlist = parsed.state.wishlist || [];
           
-          // Reconstruct Set and movieStatuses from updated wishlist
-          const wishlistSet = new Set<number>(wishlist.map((movie: Movie) => movie.id));
-          const movieStatuses: Record<number, boolean> = {};
-          wishlist.forEach((movie: Movie) => {
-            movieStatuses[movie.id] = true;
-          });
-          
-          // Update current tab's store with data from other tab
-          store.setState({
-            wishlist,
-            wishlistSet,
-            movieStatuses
-          });
+          // Only need to sync the wishlist array - computed values will be derived
+          store.setState({ wishlist });
           
         } catch (error) {
           // Cross-tab sync error handling
@@ -50,8 +39,6 @@ const setupCrossTabSync = (store: { setState: (state: Partial<WishlistStore>) =>
  */
 export interface WishlistStore {
   wishlist: Movie[];
-  wishlistSet: Set<number>;
-  movieStatuses: Record<number, boolean>;
   addToWishlist: (movie: Movie) => void;
   removeFromWishlist: (movieId: number) => void;
   clearWishlist: () => void;
@@ -66,93 +53,72 @@ export const wishlistStore = create<WishlistStore>()(
   persist(
     (set, get) => ({
       wishlist: [],
-      wishlistSet: new Set<number>(),
-      movieStatuses: {},
       
       addToWishlist: (movie: Movie) => {
-        const { wishlistSet } = get();
-        if (wishlistSet.has(movie.id)) {
+        const current = get();
+        // Check if already exists using array method
+        if (current.wishlist.some(m => m.id === movie.id)) {
           return;
         }
         
-        set((state) => {
-          const newWishlistSet = new Set(state.wishlistSet);
-          newWishlistSet.add(movie.id);
-          return {
-            wishlist: [movie, ...state.wishlist],
-            wishlistSet: newWishlistSet,
-            movieStatuses: {
-              ...state.movieStatuses,
-              [movie.id]: true
-            }
-          };
-        });
+        set((state) => ({
+          wishlist: [movie, ...state.wishlist]
+        }));
       },
       
       removeFromWishlist: (movieId: number) => {
-        const { wishlistSet } = get();
-        if (!wishlistSet.has(movieId)) {
+        const current = get();
+        // Check if exists using array method
+        if (!current.wishlist.some(m => m.id === movieId)) {
           return;
         }
         
-        set((state) => {
-          const newWishlistSet = new Set(state.wishlistSet);
-          newWishlistSet.delete(movieId);
-          const newMovieStatuses = { ...state.movieStatuses };
-          delete newMovieStatuses[movieId];
-          
-          return {
-            wishlist: state.wishlist.filter(movie => movie.id !== movieId),
-            wishlistSet: newWishlistSet,
-            movieStatuses: newMovieStatuses
-          };
-        });
+        set((state) => ({
+          wishlist: state.wishlist.filter(movie => movie.id !== movieId)
+        }));
       },
       
       clearWishlist: () => {
-        set({ 
-          wishlist: [], 
-          wishlistSet: new Set<number>(),
-          movieStatuses: {}
-        });
+        set({ wishlist: [] });
       },
       
-      isInWishlist: (movieId: number) => 
-        get().wishlistSet.has(movieId),
+      isInWishlist: (movieId: number) => {
+        return get().wishlist.some(movie => movie.id === movieId);
+      },
       
-      getMovieStatus: (movieId: number) =>
-        get().movieStatuses[movieId] ?? false,
+      getMovieStatus: (movieId: number) => {
+        return get().wishlist.some(movie => movie.id === movieId);
+      },
     }),
     {
       name: WISHLIST_STORE.PERSISTENCE_KEY,
       version: WISHLIST_STORE.VERSION,
       
-      // Custom storage for Set reconstruction
+      // Simplified storage - only persist wishlist array
       storage: {
         getItem: (name) => {
           const str = localStorage.getItem(name);
           if (!str) return null;
           const parsed = JSON.parse(str);
-          const wishlist = parsed.state.wishlist || [];
           
-          // Reconstruct Set and movieStatuses from wishlist array
-          const wishlistSet = new Set(wishlist.map((movie: Movie) => movie.id));
-          const movieStatuses: Record<number, boolean> = {};
-          wishlist.forEach((movie: Movie) => {
-            movieStatuses[movie.id] = true;
-          });
-          
+          // Only need to ensure wishlist array exists
           return {
             ...parsed,
             state: {
               ...parsed.state,
-              wishlistSet,
-              movieStatuses
+              wishlist: parsed.state.wishlist || []
             }
           };
         },
         setItem: (name, value) => {
-          localStorage.setItem(name, JSON.stringify(value));
+          // Only persist the wishlist array, computed values will be derived
+          const toStore = {
+            ...value,
+            state: {
+              wishlist: value.state.wishlist
+            }
+          };
+          localStorage.setItem(name, JSON.stringify(toStore));
         },
         removeItem: (name) => localStorage.removeItem(name),
       },
@@ -173,17 +139,8 @@ if (typeof window !== 'undefined') {
         const parsed = JSON.parse(stored);
         const wishlist = parsed.state.wishlist || [];
         
-        const wishlistSet = new Set<number>(wishlist.map((movie: Movie) => movie.id));
-        const movieStatuses: Record<number, boolean> = {};
-        wishlist.forEach((movie: Movie) => {
-          movieStatuses[movie.id] = true;
-        });
-        
-        wishlistStore.setState({
-          wishlist,
-          wishlistSet,
-          movieStatuses
-        });
+        // Only need to sync the wishlist array - computed values will be derived
+        wishlistStore.setState({ wishlist });
       } catch (error) {
         console.error('Error refreshing state on focus:', error);
       }

@@ -19,11 +19,8 @@ import { BrowserRouter } from 'react-router-dom';
 import { vi } from 'vitest';
 
 // Components
-import { Header } from '@/components/Header/Header';
-import { MovieCard } from '@/components/MovieCard/MovieCard';
-import { Carousel } from '@/components/Carousel/Carousel';
-import { WishlistButton } from '@/components/WishlistButton/WishlistButton';
-import { AppRouter } from '@/router/AppRouter';
+import { Header, MovieCard, Carousel, WishlistButton } from '@/components';
+import { AppRouter } from '@/router';
 
 // Use existing test data
 const mockMovie = {

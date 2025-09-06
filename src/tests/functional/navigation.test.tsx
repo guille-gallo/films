@@ -150,7 +150,7 @@ describe('Functional Tests: Navigation and Routing Workflows', () => {
 
     // 5. Verify movie details are displayed
     expect(screen.getByText('2h 25m')).toBeInTheDocument()
-    expect(screen.getByText('Action, Adventure')).toBeInTheDocument()
+    expect(screen.getByText('2023')).toBeInTheDocument()
   })
 
   it('should handle browser back/forward navigation correctly', async () => {

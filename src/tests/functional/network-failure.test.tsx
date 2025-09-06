@@ -1,6 +1,6 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
-import { Carousel } from '@/components/Carousel/Carousel';
+import { Carousel } from '@/components';
 
 const mockCategory = {
   id: 'fail',

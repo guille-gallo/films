@@ -22,10 +22,8 @@ import './Homepage.scss';
 export const Homepage: React.FC = () => {
   const navigate = useNavigate();
   
-
-  
   // Fetch movies for all categories
-  
+  const popularMovies = useMovies('popular');
   const topRatedMovies = useMovies('top_rated');
   const upcomingMovies = useMovies('upcoming');
 
@@ -41,7 +39,16 @@ export const Homepage: React.FC = () => {
       >
         <h1 className="visually-hidden">{i18n.pages.homepage.moviesByCategory}</h1>
         
-        
+        <div className="homepage__section">
+          <Carousel
+            category={MOVIE_CATEGORIES[0]} // Popular
+            movies={popularMovies.data?.results || []}
+            loading={popularMovies.isLoading}
+            error={popularMovies.error?.message || null}
+            onMovieClick={handleMovieClick}
+            onRetry={() => popularMovies.refetch()}
+          />
+        </div>
 
         <div className="homepage__section">
           <Carousel

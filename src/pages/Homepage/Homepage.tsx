@@ -39,7 +39,7 @@ export const Homepage: React.FC = () => {
       >
         <h1 className="visually-hidden">{i18n.pages.homepage.moviesByCategory}</h1>
         
-        <div className="homepage__section">
+        {/* <div className="homepage__section">
           <Carousel
             category={MOVIE_CATEGORIES[0]} // Popular
             movies={popularMovies.data?.results || []}
@@ -48,7 +48,7 @@ export const Homepage: React.FC = () => {
             onMovieClick={handleMovieClick}
             onRetry={() => popularMovies.refetch()}
           />
-        </div>
+        </div> */}
 
         <div className="homepage__section">
           <Carousel

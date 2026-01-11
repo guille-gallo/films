@@ -41,7 +41,7 @@ export const Homepage: React.FC = () => {
         
         <div className="homepage__section">
           <Carousel
-            category={MOVIE_CATEGORIES[0]} // Popular Movies
+            category={MOVIE_CATEGORIES[0]} // Popular 
             movies={popularMovies.data?.results || []}
             loading={popularMovies.isLoading}
             error={popularMovies.error?.message || null}

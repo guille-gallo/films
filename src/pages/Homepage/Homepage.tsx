@@ -22,6 +22,8 @@ import './Homepage.scss';
 export const Homepage: React.FC = () => {
   const navigate = useNavigate();
   
+
+  
   // Fetch movies for all categories
   
   const topRatedMovies = useMovies('top_rated');

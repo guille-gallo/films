@@ -1,6 +1,7 @@
 {
   "name": "films",
   "private": true,
+  "packageManager": "pnpm@11.3.0",
   "version": "1.0.0",
   "type": "module",
   "scripts": {
@@ -13,7 +14,7 @@
     "test:functional": "vitest run",
     "test:functional:watch": "vitest",
     "test:functional:ui": "vitest --ui",
-    "test:all": "npm run test && npm run test:functional",
+    "test:all": "pnpm test && pnpm test:functional",
     "type-check": "tsc --noEmit"
   },
   "devDependencies": {
